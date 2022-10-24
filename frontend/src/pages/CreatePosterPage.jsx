@@ -111,7 +111,7 @@ const CreatePosterPage = () => {
           value={category}
           name="category"
         >
-          <option disabled={true}>Toifani tanglang</option>
+          <option>Toifani tanglang</option>
           <option value="Kochmas mulk">Kochmas mulk</option>
           <option value="Transport">Transport</option>
           <option value="Ish o'rinlari">Ish o'rinlari</option>
