@@ -8,7 +8,7 @@ const AllPosterCard = (poster) => {
           <img
             src={image?.secure_url}
             alt={title}
-            className="h-44 md:h-36 rounded-l-lg"
+            className="h-44 md:h-36 rounded-l-lg w-screen"
           />
         </Link>
         <div className="max-w-full col-span-2 p-3 h-44">
