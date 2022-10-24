@@ -12,14 +12,14 @@ export const getPosters = createAsyncThunk(
 export const getPoster = createAsyncThunk(
    'poster/get',
    async (id) => {
-      const { data } = await axios.get(`/posters/${id}`);
+      const { data } = await axios.get(`/api/posters/${id}`);
       return data;
    }
 )
 export const newPoster = createAsyncThunk(
    'poster/new',
    async () => {
-      const { data } = await axios.get("/posters/new")
+      const { data } = await axios.get("/api/posters/new")
       return data
    }
 )

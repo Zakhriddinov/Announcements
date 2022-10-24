@@ -36,7 +36,7 @@ const getPosters = async (
   filterUrl = proceedFilters(filters);
   const search = searchQuery ? `search/${searchQuery}/` : "";
   const category = categoryName ? `category/${categoryName}/` : "";
-  const url = `/posters/${category}${search}?pageNum=${pageNumParam}${filterUrl}`;
+  const url = `/api/posters/${category}${search}?pageNum=${pageNumParam}${filterUrl}`;
   const { data } = await axios.get(url);
   return data;
 };

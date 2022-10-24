@@ -11,7 +11,7 @@ const initialState = {
 export const getMe = createAsyncThunk(
    'user/me',
    async (id) => {
-      const { data } = await axios.get(`/users/me/${id}`)
+      const { data } = await axios.get(`/api/users/me/${id}`)
       return data
    }
 )
@@ -19,7 +19,7 @@ export const updateUser = createAsyncThunk(
    'user/update',
    async (formData) => {
       const { name, lastName, phone } = formData
-      const { data } = await axios.put(`/users/profile`, { ...formData })
+      const { data } = await axios.put(`/api/users/profile`, { ...formData })
       localStorage.setItem("user", JSON.stringify({ name, lastName, phone, email: initialState.users.email, _id: initialState.users._id }))
       document.location.href = "/profile"
       return data

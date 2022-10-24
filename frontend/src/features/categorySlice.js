@@ -11,7 +11,7 @@ const initialState = {
 export const getCategories = createAsyncThunk(
    'category/get',
    async () => {
-      const { data } = await axios.get("/categories");
+      const { data } = await axios.get("/api/categories");
       return data
    }
 )
