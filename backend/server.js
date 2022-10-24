@@ -3,7 +3,7 @@ require("dotenv").config();
 require("colors");
 const connectDB = require("./config/db")
 const winston = require("winston");
-const helmet = require("helmet");
+var helmet = require("helmet");
 const cors = require("cors")
 const app = express();
 
@@ -30,7 +30,7 @@ require("./startup/routes")(app)
 
 app.use(
    cors({
-      origin: "http://localhost:3000",
+      origin: "",
       methods: ["GET", "POST", "PUT", "DELETE"]
    })
 )
