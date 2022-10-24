@@ -7,7 +7,7 @@ const PosterCard = (poster) => {
     <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md ">
       <Link to={`/poster-details/${_id}`}>
         <img
-          className="rounded-t-lg h-52 md:h-32"
+          className="rounded-t-lg w-full h-52 md:h-32"
           src={image?.secure_url}
           alt={title}
         />

@@ -4,7 +4,7 @@ const AllPosterCard = (poster) => {
   return (
     <>
       <div className="grid grid-cols-3 mx-auto bg-white rounded-lg border border-gray-200 shadow-md h-44 md:h-36 mt-3">
-        <Link to={`/poster-details/${_id}`} className="max-h-screen">
+        <Link to={`/poster-details/${_id}`} className="max-h-screen w-full">
           <img
             src={image?.secure_url}
             alt={title}
