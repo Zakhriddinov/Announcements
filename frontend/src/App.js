@@ -14,11 +14,13 @@ import RegisterPage from './pages/RegisterPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoutesComponent from './components/ProtectedRoutesComponent';
+import ScrollToTop from './utils/ScrollToTop';
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <main>
           <Routes>

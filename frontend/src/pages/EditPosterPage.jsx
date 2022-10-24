@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import TitleComponent from "../components/utils/TitleComponent";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPoster } from "../features/posterSlice";
 import Spinner from "../components/Spinner";
@@ -16,8 +16,14 @@ const EditPosterPage = () => {
     return <Spinner />;
   }
   return (
-    <div>
-      <TitleComponent title="E'lonni o'zgartirish" />
+    <div className="w-6/12 mx-auto my-32 md:w-9/12">
+      <h3 className="font-bold font-mono text-2xl text-red-400 md:text-sm">
+        Muommo chiqdi keyinroq yana urinib ko'ring
+      </h3>
+      <Link to="/" className="font-bold font-mono text-green-600 md:text-sm">
+        {`<- `}Bosh sahifaga
+      </Link>
+      {/* <TitleComponent title="E'lonni o'zgartirish" />
       <form className="w-96 md:w-80 mx-auto my-8">
         <label htmlFor="title" className="font-mono font-medium">
           E'lon sarlavhasi
@@ -137,7 +143,7 @@ const EditPosterPage = () => {
         >
           O'zgartirish
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };

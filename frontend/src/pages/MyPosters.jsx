@@ -13,7 +13,7 @@ const MyPosters = () => {
   const { id } = useParams();
   useEffect(() => {
     dispatch(getMe(id));
-  }, [id,dispatch]);
+  }, [id]);
   if (loading) {
     return <Spinner />;
   }
@@ -24,7 +24,7 @@ const MyPosters = () => {
           <div className="border w-24 rounded-full md:w-8 md:h-8 h-24 flex items-center justify-center shadow-md mr-5">
             <FaUser className="text-5xl md:text-2xl text-neutral-600" />
           </div>
-          {users.name} {users.lastName}
+          {users?.name} {users?.lastName}
         </div>
       </div>
       <div className="grid grid-cols-4 lg:grid-cols-2 xl:grid-cols-3 md:grid-cols-2 mt-16 md:mt-8 gap-4 md:gap-1">
