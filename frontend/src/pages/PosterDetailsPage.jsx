@@ -21,7 +21,7 @@ const PosterDetailsPage = () => {
   };
   useEffect(() => {
     dispatch(getPoster(posterId));
-  }, [posterId, dispatch]);
+  }, [posterId]);
 
   const onDeletedPoster = () => {
     dispatch(deletePoster(posterId));

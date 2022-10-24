@@ -41,7 +41,6 @@ const CreatePosterPage = () => {
       price === "" ||
       description === "" ||
       category === "" ||
-      image === "" ||
       region === ""
     ) {
       toast.error("Barcha ma'lumotlarni to'ldiring", {

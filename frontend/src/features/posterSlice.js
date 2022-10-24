@@ -31,7 +31,7 @@ export const createPoster = createAsyncThunk(
             ContentType: 'multipart/form-data'
          }
       }
-      const { data } = await axios.post("/posters", posterData, config)
+      const { data } = await axios.post("/api/posters", posterData, config)
       return data
    }
 )
@@ -45,7 +45,7 @@ export const updatePoster = createAsyncThunk(
                ContentType: 'multipart/form-data'
             }
          }
-         const { data } = await axios.put(`/posters/${id}`, formData, config)
+         const { data } = await axios.put(`/api/posters/${id}`, formData, config)
          return data
       } catch (error) {
          console.log(error);
@@ -56,7 +56,7 @@ export const updatePoster = createAsyncThunk(
 export const deletePoster = createAsyncThunk(
    'poster/delete',
    async (id) => {
-      const { data } = await axios.delete(`/posters/${id}`);
+      const { data } = await axios.delete(`/api/posters/${id}`);
       return data;
    }
 )
