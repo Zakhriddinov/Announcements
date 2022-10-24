@@ -7,7 +7,7 @@ module.exports = function (app) {
    //body parser
    app.use(express.json());
    app.use(cookieParser())
-   app.use(express.urlencoded({ extended: false }))
+  
 
    app.get("/api/logout", (req, res) => {
       return res.clearCookie("access_token").send("access token cleared")

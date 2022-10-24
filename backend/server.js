@@ -12,7 +12,8 @@ app.use(helmet({
    contentSecurityPolicy: false,
    crossOriginEmbedderPolicy: false
 }))
-
+require("./startup/logging")()
+require("./startup/routes")(app)
 const path = require("path");
 
 if (process.env.NODE_ENV === "production") {
@@ -23,8 +24,7 @@ if (process.env.NODE_ENV === "production") {
       res.json({ message: "API running..." })
    })
 }
-require("./startup/logging")()
-require("./startup/routes")(app)
+
 
 // connecting to database
 
