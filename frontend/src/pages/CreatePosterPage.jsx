@@ -22,10 +22,15 @@ const CreatePosterPage = () => {
       bodyClassName: "success"
     });
   };
-  const { loading } = useSelector((state) => state.poster);
+  const { loading, status } = useSelector((state) => state.poster);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (status === "fulfilled") {
+      navigate("/posters");
+      showToastMessage();
+    }
+  }, [navigate, status]);
   const onSubmit = (e) => {
     e.preventDefault();
     const posterData = new FormData();
@@ -49,10 +54,6 @@ const CreatePosterPage = () => {
       });
     } else {
       dispatch(createPoster(posterData));
-      if (posterData) {
-        navigate("/posters");
-        showToastMessage();
-      }
     }
   };
 
