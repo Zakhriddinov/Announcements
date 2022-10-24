@@ -1,0 +1,40 @@
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-bottom: 100px;
+}
+
+#root {
+  min-height: 100%;
+  position: relative;
+}
+
+.Toastify__toast {
+  border-radius: 5px !important;
+  background-color: transparent !important;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif !important;
+  padding: 5px !important;
+  box-shadow: none !important;
+}
+.Toastify__toast-body svg {
+  fill: white !important;
+}
+.Toastify__toast-body > div {
+  font-family: "Courier New", Courier, monospace !important;
+  color: white;
+}
+.Toastify__close-button svg {
+  display: none;
+}
+.Toastify__progress-bar {
+  z-index: -99;
+  height: 0px !important;
+  animation-duration: 1000ms !important;
+}
+.error {
+  background-color: red;
+}
+.success {
+  background-color: green;
+}
