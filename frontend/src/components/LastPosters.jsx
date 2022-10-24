@@ -17,7 +17,7 @@ const LastPosters = ({ posters }) => {
         </Link>
       </div>
       <div className="grid grid-cols-4 lg:grid-cols-2 xl:grid-cols-3 md:grid-cols-2 mt-16 md:mt-8 gap-4 md:gap-1">
-        {posters?.map((poster, idx) => (
+        {posters.map((poster, idx) => (
           <Fragment key={idx}>
             <PosterCard {...poster} />
           </Fragment>
