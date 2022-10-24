@@ -16,8 +16,8 @@ app.use(helmet({
 const path = require("path");
 
 if (process.NODE_ENV === "production") {
-   app.use(express.static(path.join(__dirname, "../frontend/build")))
-   app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html")))
+   app.use(express.static(path.join(__dirname, "frontend/build")))
+   app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html")))
 } else {
    app.get("/", (req, res) => {
       res.json({ message: "API running..." })
@@ -30,7 +30,7 @@ require("./startup/routes")(app)
 
 app.use(
    cors({
-      origin: "http://localhost:3000",
+      origin: "",
       methods: ["GET", "POST", "PUT", "DELETE"]
    })
 )
