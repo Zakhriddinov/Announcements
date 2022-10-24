@@ -7,7 +7,6 @@ import { newPoster } from "../features/posterSlice";
 import { getCategories } from "../features/categorySlice";
 import Main from "../components/Main";
 import Spinner from "../components/Spinner";
-import MetaComponent from "../components/MetaComponent";
 
 const HomePage = () => {
   const { newposter, loading } = useSelector((state) => state.poster);
@@ -24,7 +23,6 @@ const HomePage = () => {
   }
   return (
     <>
-      <MetaComponent />
       <div className="h-100">
         <Main />
         <Category categories={category} />

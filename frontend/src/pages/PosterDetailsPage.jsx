@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { deletePoster, getPoster } from "../features/posterSlice";
 import { toast } from "react-toastify";
-import MetaComponent from "../components/MetaComponent";
+
 const PosterDetailsPage = () => {
   const { posterId } = useParams();
   const navigate = useNavigate();
@@ -33,7 +33,6 @@ const PosterDetailsPage = () => {
   }
   return (
     <>
-      <MetaComponent title={poster?.title} description={poster?.description} />
       <div className="grid grid-cols-6 md:grid-cols-1 gap-4 mt-16 pb-20">
         <div className="col-span-4">
           <div className=" max-h-96 h-screen md:max-h-60 md:h-88 h-screen md:col-span-6 col-span-2 w-full bg-white rounded-lg border border-gray-200 shadow-md">
