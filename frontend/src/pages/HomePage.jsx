@@ -15,10 +15,10 @@ const HomePage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     dispatch(newPoster());
-  }, [dispatch]);
+  }, []);
   if (loading) {
     return <Spinner />;
   }
