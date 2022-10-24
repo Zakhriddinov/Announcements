@@ -3,10 +3,10 @@ import { useState } from "react";
 import TitleComponent from "../components/utils/TitleComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { createPoster } from "../features/posterSlice";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import { useEffect } from "react";
 
 const CreatePosterPage = () => {
   const [title, setTitle] = useState("");
@@ -25,8 +25,9 @@ const CreatePosterPage = () => {
   const { loading, status } = useSelector((state) => state.poster);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (status === "fulfilled") {
+    if (status === "created") {
       navigate("/posters");
       showToastMessage();
     }

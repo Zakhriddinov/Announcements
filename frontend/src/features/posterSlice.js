@@ -103,7 +103,7 @@ const posterSlice = createSlice({
       },
       [createPoster.fulfilled]: (state, action) => {
          state.loading = false
-         state.status = "fulfilled"
+         state.status = "created"
       },
       [createPoster.rejected]: (state, action) => {
          state.loading = false
