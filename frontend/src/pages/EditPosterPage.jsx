@@ -58,7 +58,7 @@ const EditPosterPage = () => {
     setData({ ...data, [name]: value });
   };
   return (
-    <div className="w-6/12 mx-auto my-32 md:w-9/12">
+    <div>
       <TitleComponent title="E'lonni o'zgartirish" />
       <form className="w-96 md:w-80 mx-auto my-8" onSubmit={handleSubmit}>
         <label htmlFor="title" className="font-mono font-medium">
