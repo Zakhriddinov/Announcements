@@ -33,7 +33,6 @@ const getAllPoster = asyncHandler(async (req, res) => {
 
       const searchQuery = req.params.searchQuery || ""
       let searchQueryCondition = {};
-      let select = {}
       if (searchQuery) {
          queryCondition = true;
          searchQueryCondition = {
@@ -41,9 +40,6 @@ const getAllPoster = asyncHandler(async (req, res) => {
                $regex: searchQuery,
                $options: 'i'
             }
-         };
-         select = {
-            score: { $meta: "textScore" },
          };
       }
 
@@ -78,7 +74,6 @@ const getAllPoster = asyncHandler(async (req, res) => {
       const totalPosters = await Poster.countDocuments(query)
       const posters = await Poster
          .find(query)
-         .select(select)
          .skip(recordsPerPage * (pageNum - 1))
          .limit(recordsPerPage)
          .lean()

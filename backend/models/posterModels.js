@@ -45,7 +45,7 @@ const posterSchema = Schema({
 })
 
 const Poster = model("Poster", posterSchema);
-posterSchema.index({ title: "text", description: "text" })
+// posterSchema.index({ title: "text", description: "text" })
 
 
 function validatePosters(poster) {
