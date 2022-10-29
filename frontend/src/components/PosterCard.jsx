@@ -15,7 +15,7 @@ const PosterCard = (poster) => {
       <div className="p-5 md:p-2">
         <Link to={`/poster-details/${_id}`}>
           <h5 className="mb-2 text-xl md:text-xs hover:text-white hover:bg-slate-900 inline font-bold tracking-tight text-gray-900 font-bold font-mono">
-            {title}
+            {title.length > 20 ? `${title.slice(0, 20)}...` : title}
           </h5>
         </Link>
         <h2 className="text-2xl font-bold font-mono mt-6 md:mt-2 md:text-xs">
