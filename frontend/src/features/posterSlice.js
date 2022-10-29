@@ -36,23 +36,6 @@ export const createPoster = createAsyncThunk(
    }
 )
 
-export const updatePoster = createAsyncThunk(
-   'poster/update',
-   async (id, formData) => {
-      try {
-         const config = {
-            headers: {
-               ContentType: 'multipart/form-data'
-            }
-         }
-         const { data } = await axios.put(`/api/posters/${id}`, formData, config)
-         return data
-      } catch (error) {
-         console.log(error);
-      }
-   }
-)
-
 export const deletePoster = createAsyncThunk(
    'poster/delete',
    async (id) => {
@@ -106,19 +89,6 @@ const posterSlice = createSlice({
          state.status = "created"
       },
       [createPoster.rejected]: (state, action) => {
-         state.loading = false
-         state.status = "rejected"
-         state.error = action.payload
-      },
-      [updatePoster.pending]: (state) => {
-         state.loading = true
-         state.status = "pending"
-      },
-      [updatePoster.fulfilled]: (state, action) => {
-         state.loading = false
-         state.status = "fulfilled"
-      },
-      [updatePoster.rejected]: (state, action) => {
          state.loading = false
          state.status = "rejected"
          state.error = action.payload

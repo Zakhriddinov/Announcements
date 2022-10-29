@@ -7,12 +7,4 @@ cloudinary.config({
    secure: true
 })
 
-
-
-deleteImage = async (publicId) => {
-   return await cloudinary.uploader.destroy(publicId)
-}
-
-module.exports = {
-
-}
+module.exports = cloudinary

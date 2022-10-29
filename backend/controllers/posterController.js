@@ -2,7 +2,7 @@ const { Poster, validatePosters } = require("../models/posterModels")
 const asyncHandler = require("express-async-handler");
 const recordsPerPage = require("../config/pagination");
 const { User } = require("../models/userModels");
-const cloudinary = require("cloudinary")
+const cloudinary = require("../utils/cloudinary")
 
 // @route   GET /api/posters
 // @desc    Get all posters
@@ -123,6 +123,7 @@ const createPoster = asyncHandler(async (req, res) => {
          res.status(401)
          throw new Error("User not found")
       }
+      const result = await cloudinary.uploader.upload(req.file.path)
 
       const poster = new Poster({
          title,
@@ -130,15 +131,12 @@ const createPoster = asyncHandler(async (req, res) => {
          price,
          region,
          category,
+         image: {
+            public_id: result.public_id,
+            secure_url: result.secure_url
+         },
          user: user._id
       });
-
-
-      const result = await cloudinary.uploader.upload(req.file.path)
-      poster.image = {
-         public_id: result.public_id,
-         secure_url: result.secure_url
-      }
 
       await User.findByIdAndUpdate(req.user._id,
          { $push: { posters: poster._id } },
@@ -162,26 +160,30 @@ const updatePoster = asyncHandler(async (req, res) => {
       if (error) {
          return res.status(400).send(error.details[0].message);
       }
-      const poster = await Poster.findById(req.params.id)
+      let poster = await Poster.findById(req.params.id)
 
-      poster.title = title || poster.title;
-      poster.description = description || poster.description;
-      poster.region = region || poster.region;
-      poster.price = price || poster.price;
-      poster.category = category || poster.category;
-      if (req.file.path !== '') {
-         const ImgId = poster.image.public_id
-         if (ImgId) {
-            await cloudinary.uploader.destroy(ImgId)
-         }
-         const newImage = await cloudinary.uploader.upload(req.file.path)
-         poster.image = {
-            public_id: newImage.public_id,
-            secure_url: newImage.secure_url
+      // Delete image from cloudinary
+      await cloudinary.uploader.destroy(poster.image.public_id);
+      // Upload image to cloudinary
+      let result;
+      if (req.file) {
+         result = await cloudinary.uploader.upload(req.file.path);
+      }
+      const data = {
+         title: title || poster.title,
+         description: description || poster.description,
+         region: region || poster.region,
+         price: price || poster.price,
+         category: category || poster.category,
+         image: {
+            public_id: result?.public_id || poster.image.public_id,
+            secure_url: result?.secure_url || poster.image.secure_url
          }
       }
-      const newPoster = await poster.save()
-      res.status(201).json(newPoster)
+
+
+      poster = await Poster.findByIdAndUpdate(req.params.id, data, { new: true });
+      res.json(poster)
    } catch (error) {
       throw new Error(error)
    }

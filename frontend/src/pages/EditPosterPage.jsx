@@ -1,30 +1,66 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TitleComponent from "../components/utils/TitleComponent";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getPoster } from "../features/posterSlice";
-import Spinner from "../components/Spinner";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const showToastMessage = () => {
+  toast.success("E'lon muvafaqqiyatli o'zgartirildi!", {
+    position: toast.POSITION.BOTTOM_RIGHT,
+    bodyClassName: "success"
+  });
+};
 const EditPosterPage = () => {
   const { id } = useParams();
-  const { poster, loading } = useSelector((state) => state.poster);
-  const dispatch = useDispatch();
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    region: "",
+    category: "",
+    price: "",
+    image: ""
+  });
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(getPoster(id));
-  }, [id, dispatch]);
+    fetch(`/api/posters/${id}`)
+      .then((res) => res.json({}))
+      .then((data) => setData(data));
+  }, [id]);
 
-  if (loading) {
-    return <Spinner />;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("region", data.region);
+    formData.append("price", data.price);
+    formData.append("category", data.category);
+    formData.append("image", data.image);
+    const res = await fetch(`/api/posters/${id}`, {
+      method: "PUT",
+      body: formData
+    });
+    if (res.ok) {
+      setData({
+        name: "",
+        image: "",
+        description: "",
+        region: "",
+        category: "",
+        price: ""
+      });
+      navigate(`/poster-details/${id}`);
+      showToastMessage();
+    }
+  };
+  const onChange = (name) => (e) => {
+    const value = name === "image" ? e.target.files[0] : e.target.value;
+    setData({ ...data, [name]: value });
+  };
   return (
     <div className="w-6/12 mx-auto my-32 md:w-9/12">
-      <h3 className="font-bold font-mono text-2xl text-red-400 md:text-sm">
-        Muommo chiqdi keyinroq yana urinib ko'ring
-      </h3>
-      <Link to="/" className="font-bold font-mono text-green-600 md:text-sm">
-        {`<- `}Bosh sahifaga
-      </Link>
-      {/* <TitleComponent title="E'lonni o'zgartirish" />
-      <form className="w-96 md:w-80 mx-auto my-8">
+      <TitleComponent title="E'lonni o'zgartirish" />
+      <form className="w-96 md:w-80 mx-auto my-8" onSubmit={handleSubmit}>
         <label htmlFor="title" className="font-mono font-medium">
           E'lon sarlavhasi
         </label>
@@ -33,17 +69,19 @@ const EditPosterPage = () => {
           name="title"
           id="title"
           className="border border-gray-300 text-gray-900 text-sm outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 font-mono font-regular my-2"
-          defaultValue={poster?.title}
+          value={data?.title}
+          onChange={onChange("title")}
         />
         <label htmlFor="price" className="font-mono font-medium">
           Narxi (so'mda)
         </label>
         <input
           type="number"
-          defaultValue={poster?.price}
+          value={data?.price}
           id="price"
           name="price"
           className="border border-gray-300 text-gray-900 text-sm outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 font-mono font-regular my-2"
+          onChange={onChange("description")}
         />
         <label htmlFor="category" className="font-mono font-medium">
           Toifa
@@ -51,8 +89,9 @@ const EditPosterPage = () => {
         <select
           id="category"
           className="bg-white border border-gray-300 text-gray-900 text-sm outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 font-mono font-regular cursor-pointer my-2"
-          defaultValue={poster?.category}
+          value={data?.category}
           name="category"
+          onChange={onChange("category")}
         >
           <option disabled={true}>Toifani tanglang</option>
           <option value="realty">Kochmas mulk</option>
@@ -65,11 +104,12 @@ const EditPosterPage = () => {
         </label>
         <textarea
           type="text"
-          defaultValue={poster?.description}
+          value={data?.description}
           name="description"
           id="description"
           rows="5"
           className="border border-gray-300 text-gray-900 text-sm outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 font-mono font-regular mt-2"
+          onChange={onChange("description")}
         />
         <label htmlFor="region" className="font-mono font-medium">
           Hudud
@@ -77,7 +117,8 @@ const EditPosterPage = () => {
         <select
           id="region"
           className="bg-white border border-gray-300 text-gray-900 text-sm outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 font-mono font-regular cursor-pointer my-2"
-          defaultValue={poster?.region}
+          value={data?.region}
+          onChange={onChange("region")}
         >
           <option disabled={true}>Hududni tanlang</option>
           <option value="Toshkent">Toshkent</option>
@@ -98,7 +139,7 @@ const EditPosterPage = () => {
           Rasm tanlang
         </label>
 
-        <img src={poster?.image?.secure_url} alt="" />
+        {/* <img src={poster?.image?.secure_url} alt="" /> */}
         <div className="flex justify-center items-center w-full">
           <label
             for="dropzone-file"
@@ -106,7 +147,7 @@ const EditPosterPage = () => {
           >
             <div className="flex flex-col justify-center items-center pt-5 pb-6">
               <svg
-                aria-hidden="true"
+                ariaHidden="true"
                 className="mb-3 w-10 h-10 text-gray-400"
                 fill="none"
                 stroke="currentColor"
@@ -114,9 +155,9 @@ const EditPosterPage = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                 ></path>
               </svg>
@@ -131,9 +172,10 @@ const EditPosterPage = () => {
             <input
               id="dropzone-file"
               type="file"
-              multiple
+              accept="image/*"
               name="image"
               className="hidden"
+              onChange={onChange("image")}
             />
           </label>
         </div>
@@ -143,7 +185,7 @@ const EditPosterPage = () => {
         >
           O'zgartirish
         </button>
-      </form> */}
+      </form>
     </div>
   );
 };
