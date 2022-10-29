@@ -27,7 +27,10 @@ const Navbar = () => {
           <Link to="/" className="flex items-center">
             <img src={logo} alt="logo/img" className={`w-12 md:w-8 xl:w-10`} />
             <span className="text-2xl lg:text-lg xl:text-xl md:text-md  font-mono font-bold ml-2 text-white">
-              E'lonlar doskasi
+              E'lonlar doskasi{" "}
+              <sup className="font-bold font-mono text-xs text-green-400 border-solid border-2 border-green-400 rounded">
+                Beta
+              </sup>
             </span>
           </Link>
           <button
