@@ -36,7 +36,12 @@ const getAllPoster = asyncHandler(async (req, res) => {
       let select = {}
       if (searchQuery) {
          queryCondition = true;
-         searchQueryCondition = { $text: { $search: searchQuery } };
+         searchQueryCondition = {
+            title: {
+               $regex: searchQuery,
+               $options: 'i'
+            }
+         };
          select = {
             score: { $meta: "textScore" },
          };
