@@ -24,7 +24,7 @@ const FilterPoster = ({
             <option value="" className="font-mono font-medium">
               Hammasi
             </option>
-            <option value="Ko'chmas mulk" className="font-mono font-medium">
+            <option value="Kochmas mulk" className="font-mono font-medium">
               Ko'chmas mulk
             </option>
             <option value="Transport" className="font-mono font-medium">

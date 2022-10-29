@@ -93,11 +93,11 @@ const EditPosterPage = () => {
           name="category"
           onChange={onChange("category")}
         >
-          <option disabled={true}>Toifani tanglang</option>
-          <option value="realty">Kochmas mulk</option>
-          <option value="trasport">Transport</option>
-          <option value="job">Ish o'rinlari</option>
-          <option value="electronics">Elektrotexnika</option>
+          <option>Toifani tanglang</option>
+          <option value="Kochmas mulk">Kochmas mulk</option>
+          <option value="Transport">Transport</option>
+          <option value="Ish o'rinlari">Ish o'rinlari</option>
+          <option value="Elektrotexnika">Elektrotexnika</option>
         </select>
         <label htmlFor="description" className="font-mono font-medium">
           Tavsif
