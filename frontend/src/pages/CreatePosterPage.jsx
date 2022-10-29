@@ -176,7 +176,7 @@ const CreatePosterPage = () => {
               id="dropzone-file"
               onChange={(e) => setImage(e.target.files[0])}
               type="file"
-              multiple
+              accept="image/*"
               className="hidden"
             />
           </label>
