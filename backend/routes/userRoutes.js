@@ -7,8 +7,8 @@ const router = Router();
 router.post("/", createUser);
 router.post("/login", loginUser);
 
-router.use(protect)
 router.get("/me/:id", getMe);
+router.use(protect)
 router.put("/profile", updateUser);
 
 
